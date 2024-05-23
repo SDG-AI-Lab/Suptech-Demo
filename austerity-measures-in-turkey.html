@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austerity Measures in the Public Sector in Turkey</title>
+    <!-- Ubold Admin CSS -->
+    <link href="path/to/ubold.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Georgia', serif;
+            color: #333;
+        }
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header img {
+            height: 50px;
+            vertical-align: middle;
+        }
+        .header h1 {
+            display: inline;
+            margin-left: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        .overview {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #012c5a;
+            display: inline-block;
+            color: #012c5a;
+        }
+        .analysis-step {
+            margin-bottom: 20px;
+        }
+        .analysis-step p {
+            margin: 0;
+        }
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #343a40;
+            padding: 10px 20px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .menu .logos img {
+            height: 40px;
+        }
+        .menu .icons {
+            display: flex;
+            gap: 20px;
+        }
+        .menu .icons a {
+            color: white;
+            font-size: 20px;
+        }
+        .menu .icons a:hover {
+            color: #ffc107;
+        }
+        .cover-image-container {
+            width: 100%;
+            height: 200px; /* Set the desired height for the container */
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .cover-image {
+            position: absolute;
+            top: -400px; /* Move the image up by 400px */
+            width: 100%;
+            height: auto;
+        }
+        .analysis-step {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .chart-container {
+            flex: 1;
+            margin: 0 20px;
+        }
+        .text-container {
+            flex: 1;
+            margin: 0 20px;
+        }
+        .analysis-step .chart-container canvas {
+            width: 100% !important;
+            height: auto !important;
+            max-width: 400px;
+            max-height: 300px;
+        }
+        .analysis-step:nth-child(odd) .chart-container {
+            order: 1;
+        }
+        .analysis-step:nth-child(odd) .text-container {
+            order: 2;
+        }
+        .analysis-step:nth-child(even) .chart-container {
+            order: 2;
+        }
+        .analysis-step:nth-child(even) .text-container {
+            order: 1;
+        }
+        .pdf-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .pdf-button:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <div class="logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/UNDP_logo.svg" alt="UNDP Logo">
+        </div>
+        <div class="icons">
+            <a href="#home" title="Home"><i class="fas fa-home"></i></a>
+            <a href="#about" title="About Us"><i class="fas fa-info-circle"></i></a>
+            <a href="#demo" title="Demo"><i class="fas fa-chart-bar"></i></a>
+        </div>
+        <div class="logos">
+            <img src="https://sdgailab.org/assets/img/Webp.net-resizeimage.png" alt="SDG AI Lab Logo">
+        </div>
+    </div>
+
+    <div class="container" id="report-content">
+        <button class="pdf-button" onclick="downloadPDF()"><i class="fas fa-download"></i></button>
+        <div class="cover-image-container">
+            <img src="https://idsb.tmgrup.com.tr/ly/uploads/images/2020/03/17/thumbs/800x531/25740.jpg?v=1584457496" alt="Cover Image" class="cover-image">
+        </div>
+        
+        <div class="header">
+            <h1>Austerity Measures in the Public Sector in Turkey</h1>
+        </div>
+
+        <div class="overview">
+            <p>
+                Turkey's new austerity measures aim to address the economic crisis by cutting investments and service procurement, potentially reforming taxes to save 1 trillion lira. Announced by Finance Minister Mehmet Şimşek and Vice President Cevdet Yılmaz, these measures seek to reduce the budget deficit. Critiques emphasize equitable burden distribution and the symbolic importance of leadership in implementing these changes. The political implications and necessity of these measures are also highlighted.</p>
+        </div>
+
+        <div class="analysis-steps">
+
+            <div class="analysis-step">
+                <div class="chart-container">
+                    <canvas id="platformDistributionChart"></canvas>
+                </div>
+                <div class="text-container">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="analysis-step">
+                <div class="text-container">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="sentimentChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="analysis-step">
+                <div class="chart-container">
+                    <canvas id="coOccuringHashtagsChart"></canvas>
+                </div>
+                <div class="text-container">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                </div>
+            </div>
+            
+            <div class="analysis-step">
+                <div class="text-container">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="keywordsChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="analysis-step">
+                <div class="chart-container">
+                    <canvas id="mostDiscussedPagesChart"></canvas>
+                </div>
+                <div class="text-container">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ubold Admin JS -->
+    <script src="path/to/ubold.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Dummy data for the charts with a professional color palette
+        var ctx1 = document.getElementById('platformDistributionChart').getContext('2d');
+        var platformDistributionChart = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Facebook', 'Instagram'],
+                datasets: [{
+                    label: 'Platform Distribution',
+                    data: [60, 40],
+                    backgroundColor: [
+                        '#2c3e50',
+                        '#18bc9c'
+                    ],
+                    borderColor: [
+                        '#2c3e50',
+                        '#18bc9c'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById('sentimentChart').getContext('2d');
+        var sentimentChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Positive', 'Neutral', 'Negative'],
+                datasets: [{
+                    label: 'Sentiment Analysis',
+                    data: [70, 20, 10],
+                    backgroundColor: [
+                        '#3498db',
+                        '#95a5a6',
+                        '#e74c3c'
+                    ],
+                    borderColor: [
+                        '#3498db',
+                        '#95a5a6',
+                        '#e74c3c'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        var ctx3 = document.getElementById('coOccuringHashtagsChart').getContext('2d');
+        var coOccuringHashtagsChart = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['#economy', '#policy', '#budget', '#reform'],
+                datasets: [{
+                    label: 'Co-occurring Hashtags',
+                    data: [30, 25, 20, 15],
+                    backgroundColor: [
+                        '#2c3e50',
+                        '#18bc9c',
+                        '#3498db',
+                        '#e74c3c'
+                    ],
+                    borderColor: [
+                        '#2c3e50',
+                        '#18bc9c',
+                        '#3498db',
+                        '#e74c3c'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        var ctx4 = document.getElementById('keywordsChart').getContext('2d');
+        var keywordsChart = new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: ['austerity', 'budget', 'economy', 'policy'],
+                datasets: [{
+                    label: 'Most Occurred Keywords',
+                    data: [35, 30, 25, 20],
+                    backgroundColor: [
+                        '#e74c3c',
+                        '#2c3e50',
+                        '#18bc9c',
+                        '#3498db'
+                    ],
+                    borderColor: [
+                        '#e74c3c',
+                        '#2c3e50',
+                        '#18bc9c',
+                        '#3498db'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        var ctx5 = document.getElementById('mostDiscussedPagesChart').getContext('2d');
+        var mostDiscussedPagesChart = new Chart(ctx5, {
+            type: 'horizontalBar',
+            data: {
+                labels: ['Central Bank', 'Ministry of Finance', 'Parliament'],
+                datasets: [{
+                    label: 'Most Discussed Pages',
+                    data: [40, 35, 25],
+                    backgroundColor: [
+                        '#95a5a6',
+                        '#18bc9c',
+                        '#e74c3c'
+                    ],
+                    borderColor: [
+                        '#95a5a6',
+                        '#18bc9c',
+                        '#e74c3c'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const container = document.getElementById('report-content');
+            html2canvas(container).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'pt', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                const margin = 40;
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                let position = 0;
+                pdf.addImage(imgData, 'PNG', margin, position, pdfWidth - 2 * margin, pdfHeight - 2 * margin);
+                while (position + pageHeight < canvas.height) {
+                    position -= pageHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', margin, position, pdfWidth - 2 * margin, pdfHeight - 2 * margin);
+                }
+                pdf.save('report.pdf');
+            });
+        }
+    </script>
+</body>
+</html>
