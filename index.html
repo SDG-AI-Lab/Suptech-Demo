@@ -23,10 +23,10 @@
         .container {
             margin: 20px auto;
             padding: 20px;
-            max-width: 800px;
+            max-width: 1000px;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
+            
             position: relative;
         }
         .header {
@@ -56,6 +56,11 @@
         }
         .analysis-step {
             margin-bottom: 20px;
+            background-color: #fafafa;
+            border: 1px solid #e6e1e1;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
         }
         .analysis-step p {
             margin: 0;
@@ -85,14 +90,14 @@
         }
         .cover-image-container {
             width: 100%;
-            height: 200px; /* Set the desired height for the container */
+            height: 200px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-top: 30px;
             position: relative;
         }
         .cover-image {
             position: absolute;
-            top: -400px; /* Move the image up by 400px */
+            top: -350px;
             width: 100%;
             height: auto;
         }
@@ -141,6 +146,34 @@
         .pdf-button:hover {
             color: #007bff;
         }
+        .separator {
+            height: 1px;
+            background-color: #ddd;
+            margin: 40px 0;
+        }
+        .suggestions {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+        .suggestion-item {
+            background-color: #e0f7fa;
+            padding: 10px;
+        }
+        .suggestion-item {
+            background-color: transparent; /* Remove background color */
+            padding: 10px;
+            margin-bottom: 10px; /* Add some space between items */
+        }
+
+        .suggestion-item p {
+            margin: 5px 0 0;
+        }
     </style>
 </head>
 <body>
@@ -160,9 +193,7 @@
 
     <div class="container" id="report-content">
         <button class="pdf-button" onclick="downloadPDF()"><i class="fas fa-download"></i></button>
-        <div class="cover-image-container">
-            <img src="https://idsb.tmgrup.com.tr/ly/uploads/images/2020/03/17/thumbs/800x531/25740.jpg?v=1584457496" alt="Cover Image" class="cover-image">
-        </div>
+
         
         <div class="header">
             <h1>Austerity Measures in the Public Sector in Turkey</h1>
@@ -170,60 +201,233 @@
 
         <div class="overview">
             <p>
-                Turkey's new austerity measures aim to address the economic crisis by cutting investments and service procurement, potentially reforming taxes to save 1 trillion lira. Announced by Finance Minister Mehmet Şimşek and Vice President Cevdet Yılmaz, these measures seek to reduce the budget deficit. Critiques emphasize equitable burden distribution and the symbolic importance of leadership in implementing these changes. The political implications and necessity of these measures are also highlighted.</p>
+                Turkey's new austerity measures aim to address the economic crisis by cutting investments and service procurement, potentially reforming taxes to save 1 trillion lira. Announced by Finance Minister Mehmet Şimşek and Vice President Cevdet Yılmaz, these measures seek to reduce the budget deficit. Critiques emphasize equitable burden distribution and the symbolic importance of leadership in implementing these changes. The political implications and necessity of these measures are also highlighted.
+            </p>
+            <br>
+            <p>
+                This report analyzes social media discussions about Turkey's new austerity measures, drawing insights from posts and comments on Instagram and Facebook. The data was collected using hashtags related to public sector austerity, including #kamudatasarruf, #memurhakkınıalamıyor, #tasarruftedbirleri, and #verimlilikpaketi. The analysis focuses on sentiment, key phrases, and co-occurring hashtags to understand public perception and provide actionable recommendations for policymakers.
+            </p>
         </div>
 
-        <div class="analysis-steps">
-
+        <h2>About the dataset</h2>
             <div class="analysis-step">
                 <div class="chart-container">
                     <canvas id="platformDistributionChart"></canvas>
                 </div>
                 <div class="text-container">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.
-                    </p>
+                    <p>The datasets analyzed in this report come from Instagram and Facebook, focusing on public opinion regarding Turkey's new austerity measures. The main dataset includes 172 posts and comments tagged with relevant hashtags such as #kamudatasarruf, #memurhakkınıalamıyor, #tasarruftedbirleri, and #verimlilikpaketi. This data provides valuable insights into how citizens perceive the austerity measures and highlights their suggestions for improvement.</p>
                 </div>
             </div>
-            
+   
+            <h2>What citizens think</h2>
             <div class="analysis-step">
                 <div class="text-container">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                    <p>
+                        Negative sentiment posts reflect widespread dissatisfaction with the austerity measures. Key concerns include:
+                        <ul>
+                            <li>The impact of austerity on public services and employee rights.</li>
+                            <li>Perceived inefficiencies and mismanagement within government operations.</li>
+                            <li>The burden placed on lower-income citizens and public sector workers.</li>
+                          </ul>
+                        Example post: "The austerity programme, which also includes cuts in essential services, is causing significant distress among citizens and public sector employees."
+                    </p>
                 </div>
                 <div class="chart-container">
                     <canvas id="sentimentChart"></canvas>
                 </div>
             </div>
-            
+
+            <div class="analysis-step">
+                <div class="text-container">
+                    <div class="box-container" style="display: flex; justify-content: space-between;">
+                        <div class="box" style="flex: 1; margin-right: 20px; padding: 20px; background-color: #e9ecef; border: 1px solid #ced4da; border-radius: 5px;">
+                            <h4>Compliments</h4>
+                            <p>Content for compliments.</p>
+                            <ul>
+                                <li><strong>Effective Cost-saving Measures:</strong>Several posts appreciate the government's efforts in implementing cost-saving measures that aim to reduce unnecessary expenditures.
+                                </li>
+                                <li><strong>Transparency in Government Spending:</strong>Positive feedback is given to transparent communication regarding where and how funds are being saved and reallocated.
+                                </li>
+                                <li><strong>Focus on Efficiency:</strong>Some posts commend the focus on improving efficiency within government operations rather than making arbitrary cuts.
+                                </li>
+                            </ul>
+                            
+
+                        </div>
+                        <div class="box" style="flex: 1; margin-left: 20px; padding: 20px; background-color: #e9ecef; border: 1px solid #ced4da; border-radius: 5px;">
+                            <h4>Complaints</h4>
+                            <p>Content for complaints.</p>
+                            <ul>
+                                <li><strong>Impact on Public Services and Employees:</strong></li>
+                                <li><strong>Criticism of Leadership:</strong>Specific government figures, such as Ali Erbass and the Editor-in-Chief of Religious Affairs, are mentioned critically, reflecting dissatisfaction with their handling of the situation.</li>
+                                <li><strong>Financial Mismanagement:</strong>Complaints about perceived mismanagement and inefficiencies in government spending are prevalent.                                </li>
+                                <li><strong>Disproportionate Burden:</strong>There is a strong sentiment that austerity measures disproportionately affect lower-income citizens and public sector workers.
+                                </li>
+                                <li><strong>Lack of Support for Vulnerable Groups:</strong>Citizens call for better social safety nets and support programs for those most affected by the austerity measures.
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>What is discussed</h2>
             <div class="analysis-step">
                 <div class="chart-container">
                     <canvas id="coOccuringHashtagsChart"></canvas>
                 </div>
                 <div class="text-container">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                    <p>
+                        In addition to the initial hashtags used for data collection, the following co-occurring hashtags stand out due to their specificity or context within the discussions on austerity measures:
+    
+    
+                        <ul>
+                            <li>
+                                <strong>#maaş:</strong> Indicates discussions about salaries and wages, reflecting concerns over financial compensation amid austerity.
+                            </li>
+    
+                            <li>
+                                <strong>#sendika:</strong>  Highlights the role of labor unions in addressing employee rights and negotiating terms affected by austerity.
+                            </li>
+    
+                            <li>
+                                <strong>#zam:</strong> Discusses price hikes and inflation, a key concern for citizens facing economic challenges
+                            </li>
+    
+                            <li>
+                                <strong>#emekli:</strong> Refers to retirees, showing concerns about how austerity measures affect pensioners.
+                            </li>
+                        </ul>
+    
+                        These key phrases underscore the need for policymakers to address public concerns transparently and ensure that austerity measures are implemented fairly and effectively. ​
+    
+                    </p>
                 </div>
             </div>
-            
+  
             <div class="analysis-step">
                 <div class="text-container">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                    <p>
+                        Trending key phrases in the data highlight the main themes of public discussion:
+                        
+                        <ul>
+                            <li>
+                                <strong>"Public austerity":</strong> Frequent mentions of public austerity reflect widespread awareness and concern about government spending cuts.
+                            </li>
+
+                            <li>
+                                <strong>"Employee rights":</strong> Discussions about employee rights underscore the perceived negative impact of austerity on public sector workers.
+                            </li>
+
+                            <li>
+                                <strong>"Essential services":</strong> The term "essential services" appears often, indicating public fear that crucial services may be compromised.
+                            </li>
+                        </ul>
+
+                        These key phrases underscore the need for policymakers to address public concerns transparently and ensure that austerity measures are implemented fairly and effectively. ​
+
+                    </p>
                 </div>
                 <div class="chart-container">
                     <canvas id="keywordsChart"></canvas>
                 </div>
             </div>
-            
+
+
+            <h2>Most popular posts</h2>
             <div class="analysis-step">
                 <div class="chart-container">
-                    <canvas id="mostDiscussedPagesChart"></canvas>
+                    <canvas id="coOccuringHashtagsChart"></canvas>
                 </div>
                 <div class="text-container">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                    <p>
+                        In addition to the initial hashtags used for data collection, the following co-occurring hashtags stand out due to their specificity or context within the discussions on austerity measures:
+    
+    
+                        <ul>
+                            <li>
+                                <strong>#maaş:</strong> Indicates discussions about salaries and wages, reflecting concerns over financial compensation amid austerity.
+                            </li>
+    
+                            <li>
+                                <strong>#sendika:</strong>  Highlights the role of labor unions in addressing employee rights and negotiating terms affected by austerity.
+                            </li>
+    
+                            <li>
+                                <strong>#zam:</strong> Discusses price hikes and inflation, a key concern for citizens facing economic challenges
+                            </li>
+    
+                            <li>
+                                <strong>#emekli:</strong> Refers to retirees, showing concerns about how austerity measures affect pensioners.
+                            </li>
+                        </ul>
+    
+                        These key phrases underscore the need for policymakers to address public concerns transparently and ensure that austerity measures are implemented fairly and effectively. ​
+    
+                    </p>
                 </div>
             </div>
-        </div>
-    </div>
 
+
+            <h2>To take an action</h2>
+            <div class="analysis-step">
+            <div class="suggestions">
+                <div class="suggestion-item">
+                    <h4>Enhance Transparency and Communication</h4>
+                    <p>
+                        
+                    </p>
+                </div>
+                <div class="suggestion-item">
+                    <ul>
+                        <li>
+                            <strong>Public Engagement:</strong> Establish regular forums and Q&A sessions with citizens to explain the rationale behind austerity measures and address concerns.
+                        </li>
+                        <li>
+                            <strong>Clear Communication:</strong> Provide detailed, accessible information about the measures, their objectives, and expected outcomes.
+                        </li>
+                    </ul>
+                </div>
+                <div class="suggestion-item">
+                    <h4>Protect Vulnerable Groups</h4>
+                    <p>
+                        
+                    </p>
+                </div>
+                <div class="suggestion-item">
+                    <ul>
+                        <li>
+                            <strong>Social Safety Nets:</strong>  Implement targeted support programs for lower-income citizens and public sector employees affected by austerity.
+                        </li>
+                        <li> 
+                            <strong>Equitable Policies:</strong> Ensure that austerity measures do not disproportionately impact vulnerable populations.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="suggestion-item">
+                    <h4>Improve Government Efficiency
+
+                    </h4>
+                    <p>
+                        
+                    </p>
+                </div>
+                <div class="suggestion-item">
+                    <ul>
+                        <li>
+                            <strong>Performance Audits:</strong>Conduct regular audits of government operations to identify inefficiencies and areas for cost savings.
+                        </li>
+                        <li> 
+                            <strong>Best Practices:</strong> Adopt best practices from other countries that have successfully implemented austerity measures without compromising public services.
+                        </li>
+                    </ul>
+                </div>
+
+                
+            </div>
+        </div>
     <!-- Ubold Admin JS -->
     <script src="path/to/ubold.min.js"></script>
     <!-- Chart.js -->
@@ -348,25 +552,29 @@
         });
 
         function downloadPDF() {
-            const { jsPDF } = window.jspdf;
-            const container = document.getElementById('report-content');
-            html2canvas(container).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF('p', 'pt', 'a4');
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-                const margin = 40;
-                const pageHeight = pdf.internal.pageSize.getHeight();
-                let position = 0;
+        const { jsPDF } = window.jspdf;
+        const container = document.getElementById('report-content');
+        html2canvas(container, { scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            const margin = 40;
+            const pageHeight = pdf.internal.pageSize.getHeight() - margin * 2;
+            let position = 0;
+
+            pdf.addImage(imgData, 'PNG', margin, margin, pdfWidth - 2 * margin, pdfHeight - 2 * margin);
+            position -= pageHeight;
+
+            while (position > -canvas.height) {
+                pdf.addPage();
                 pdf.addImage(imgData, 'PNG', margin, position, pdfWidth - 2 * margin, pdfHeight - 2 * margin);
-                while (position + pageHeight < canvas.height) {
-                    position -= pageHeight;
-                    pdf.addPage();
-                    pdf.addImage(imgData, 'PNG', margin, position, pdfWidth - 2 * margin, pdfHeight - 2 * margin);
-                }
-                pdf.save('report.pdf');
-            });
-        }
+                position -= pageHeight;
+            }
+
+            pdf.save('report.pdf');
+        });
+    }
     </script>
 </body>
 </html>
