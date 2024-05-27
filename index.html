@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Austerity Measures in the Public Sector in Turkey</title>
     <!-- Ubold Admin CSS -->
-    <link href="path/to/ubold.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/ubold-dark.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
@@ -14,6 +14,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <!-- html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- wordcloud2.js -->
+    <script src="https://cdn.jsdelivr.net/npm/wordcloud2.js"></script>
+    
     <style>
         body {
             background-color: #f0f0f0;
@@ -58,9 +61,9 @@
         .analysis-step {
             margin-bottom: 20px;
             background-color: #fafafa;
-            border: 1px solid #e6e1e1;
+            border: 1px solid #b1afaf;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
         }
         .analysis-step p {
@@ -213,10 +216,11 @@
         <h2>About the dataset</h2>
             <div class="analysis-step">
                 <div class="chart-container">
-                    <canvas id="platformDistributionChart"></canvas>
+                    <canvas id="platformDistributionChart" width="400" height="400"></canvas>
                 </div>
                 <div class="text-container">
-                    <p>The datasets analyzed in this report come from Instagram and Facebook, focusing on public opinion regarding Turkey's new austerity measures. The main dataset includes 172 posts and comments tagged with relevant hashtags such as #kamudatasarruf, #memurhakkınıalamıyor, #tasarruftedbirleri, and #verimlilikpaketi. This data provides valuable insights into how citizens perceive the austerity measures and highlights their suggestions for improvement.</p>
+                    <p>
+                        The collected dataset consists of posts and comments from Instagram and Facebook related to four hashtags: '#publicsavings', '#publicemployeesrights', '#savingmeasures', and '#efficiencypackage'. It includes details such as post text, sentiment, intent, language, and engagement metrics. The main dataset captures a variety of public opinions, while the hashtags dataset connects these opinions to specific hashtags.</p>
                 </div>
             </div>
    
@@ -224,13 +228,7 @@
             <div class="analysis-step">
                 <div class="text-container">
                     <p>
-                        Negative sentiment posts reflect widespread dissatisfaction with the austerity measures. Key concerns include:
-                        <ul>
-                            <li>The impact of austerity on public services and employee rights.</li>
-                            <li>Perceived inefficiencies and mismanagement within government operations.</li>
-                            <li>The burden placed on lower-income citizens and public sector workers.</li>
-                          </ul>
-                        Example post: "The austerity programme, which also includes cuts in essential services, is causing significant distress among citizens and public sector employees."
+                        Sentiment analysis of the posts shows a mix of positive, negative, and neutral reactions to the new austerity measures. Overall, there is a noticeable trend of concern and dissatisfaction among citizens, but some positive sentiments indicate support for the measures’ potential long-term benefits.
                     </p>
                 </div>
                 <div class="chart-container">
@@ -238,71 +236,74 @@
                 </div>
             </div>
 
-            <div class="analysis-step">
-                <div class="text-container">
+
                     <div class="box-container" style="display: flex; justify-content: space-between;">
-                        <div class="box" style="flex: 1; margin-right: 20px; padding: 20px; background-color: #e9ecef; border: 1px solid #ced4da; border-radius: 5px;">
+                        <div class="box" style="flex: 1; margin-right: 20px; padding: 20px; background-color: #fafafa; border: 1px solid #b1afaf; border-radius: 10px;">
                             <h4>Compliments</h4>
-                            <p>Content for compliments.</p>
                             <ul>
-                                <li><strong>Effective Cost-saving Measures:</strong>Several posts appreciate the government's efforts in implementing cost-saving measures that aim to reduce unnecessary expenditures.
+                                <li>
+                                    <strong>Efforts to Reduce Expenditures:</strong> Some citizens appreciate the efforts to reduce unnecessary government expenditures.
                                 </li>
-                                <li><strong>Transparency in Government Spending:</strong>Positive feedback is given to transparent communication regarding where and how funds are being saved and reallocated.
+                                <br>
+                                <li>
+                                    <strong>Increased Efficiency:</strong> Positive comments often mention the potential for increased efficiency and productivity in the public sector.
                                 </li>
-                                <li><strong>Focus on Efficiency:</strong>Some posts commend the focus on improving efficiency within government operations rather than making arbitrary cuts.
+                                <br>
+                                <li>
+                                    <strong>Economic Stability:</strong> There is support for long-term economic stability that these measures might bring.
+                                </li>
+                            </ul>
+                            
+                            
+
+                        </div>
+                        
+                        <div class="box" style="flex: 1;  padding: 20px; background-color: #fafafa; border: 1px solid #b1afaf; border-radius: 10px;">
+                            <h4>Complaints</h4>
+                            <ul>
+                                <li>
+                                    <strong>Insufficient Support:</strong> Citizens express frustration about the lack of sufficient government support during austerity.
+                                </li>
+                                <br>
+                                <li>
+                                    <strong>Impact on Public Services:</strong> Many posts highlight concerns about the negative impact on public services and employee rights.
+                                </li>
+                                <br>
+                                <li>
+                                    <strong>Unfair Targeting:</strong> There is a strong sentiment that the measures are unfairly targeting lower-income groups.
                                 </li>
                             </ul>
                             
 
                         </div>
-                        <div class="box" style="flex: 1; margin-left: 20px; padding: 20px; background-color: #e9ecef; border: 1px solid #ced4da; border-radius: 5px;">
-                            <h4>Complaints</h4>
-                            <p>Content for complaints.</p>
-                            <ul>
-                                <li><strong>Impact on Public Services and Employees:</strong></li>
-                                <li><strong>Criticism of Leadership:</strong>Specific government figures, such as Ali Erbass and the Editor-in-Chief of Religious Affairs, are mentioned critically, reflecting dissatisfaction with their handling of the situation.</li>
-                                <li><strong>Financial Mismanagement:</strong>Complaints about perceived mismanagement and inefficiencies in government spending are prevalent.                                </li>
-                                <li><strong>Disproportionate Burden:</strong>There is a strong sentiment that austerity measures disproportionately affect lower-income citizens and public sector workers.
-                                </li>
-                                <li><strong>Lack of Support for Vulnerable Groups:</strong>Citizens call for better social safety nets and support programs for those most affected by the austerity measures.
-                                </li>
-                            </ul>
-
-                        </div>
                     </div>
-                </div>
-            </div>
+
 
             <h2>What is discussed</h2>
             <div class="analysis-step">
                 <div class="chart-container">
-                    <canvas id="coOccuringHashtagsChart"></canvas>
+                    <div id="wordcloud" style="width: 600px; height: 400px;"></div>
                 </div>
                 <div class="text-container">
                     <p>
-                        In addition to the initial hashtags used for data collection, the following co-occurring hashtags stand out due to their specificity or context within the discussions on austerity measures:
+                        Co-occurring hashtags reveal additional topics of interest and trending discussions:
     
     
                         <ul>
                             <li>
-                                <strong>#maaş:</strong> Indicates discussions about salaries and wages, reflecting concerns over financial compensation amid austerity.
+                                <strong>#economicsustainability:</strong>Citizens discuss the broader economic impact of the measures.
+                            </li>
+                            <br>
+                            <li>
+                                <strong>#governmentaccountability:</strong>There is a call for greater transparency and accountability in how the measures are implemented.
+                            </li>
+                            <br>
+                            <li>
+                                <strong>#publicserviceefficiency:</strong> Discussions about improving efficiency in public services are prevalent and trending.
                             </li>
     
-                            <li>
-                                <strong>#sendika:</strong>  Highlights the role of labor unions in addressing employee rights and negotiating terms affected by austerity.
-                            </li>
-    
-                            <li>
-                                <strong>#zam:</strong> Discusses price hikes and inflation, a key concern for citizens facing economic challenges
-                            </li>
-    
-                            <li>
-                                <strong>#emekli:</strong> Refers to retirees, showing concerns about how austerity measures affect pensioners.
-                            </li>
                         </ul>
-    
-                        These key phrases underscore the need for policymakers to address public concerns transparently and ensure that austerity measures are implemented fairly and effectively. ​
-    
+        
                     </p>
                 </div>
             </div>
@@ -314,15 +315,15 @@
                         
                         <ul>
                             <li>
-                                <strong>"Public austerity":</strong> Frequent mentions of public austerity reflect widespread awareness and concern about government spending cuts.
+                                <strong>Public sector cuts:</strong> Frequent mentions of public austerity reflect widespread awareness and concern about government spending cuts.
                             </li>
-
+                            <br>
                             <li>
-                                <strong>"Employee rights":</strong> Discussions about employee rights underscore the perceived negative impact of austerity on public sector workers.
+                                <strong>Employee rights:</strong>Many posts focus on the rights of public sector employees amidst austerity.
                             </li>
-
+                            <br>
                             <li>
-                                <strong>"Essential services":</strong> The term "essential services" appears often, indicating public fear that crucial services may be compromised.
+                                <strong>Economic impact:</strong> Citizens are concerned about the broader economic impact of these measures.
                             </li>
                         </ul>
 
@@ -331,36 +332,36 @@
                     </p>
                 </div>
                 <div class="chart-container">
-                    <canvas id="keywordsChart"></canvas>
+                    <canvas id="keywordsChart" width="800" height="600"></canvas>
                 </div>
             </div>
 
 
-            <h2>Most popular posts</h2>
+            <h2>Authorities Criticized</h2>
             <div class="analysis-step">
-                <div class="chart-container">
-                    <canvas id="coOccuringHashtagsChart"></canvas>
-                </div>
                 <div class="text-container">
                     <p>
-                        In addition to the initial hashtags used for data collection, the following co-occurring hashtags stand out due to their specificity or context within the discussions on austerity measures:
-    
+                        Analysis of the data reveals criticism of key authorities and institutions involved in implementing austerity measures:
     
                         <ul>
                             <li>
-                                <strong>#maaş:</strong> Indicates discussions about salaries and wages, reflecting concerns over financial compensation amid austerity.
+                                <strong>Ministry of Treasury and Finance</strong> Criticized for harsh economic measures and lack of effective communication.
                             </li>
-    
+                            <br>
                             <li>
-                                <strong>#sendika:</strong>  Highlights the role of labor unions in addressing employee rights and negotiating terms affected by austerity.
+                                <strong>President</strong> Seen as out of touch with public needs and pushing harmful policies.
                             </li>
-    
+                            <br>
                             <li>
-                                <strong>#zam:</strong> Discusses price hikes and inflation, a key concern for citizens facing economic challenges
+                                <strong>AKP (Justice and Development Party):</strong> Criticized for overall economic policies and implementation of austerity measures.
                             </li>
-    
+                            <br>
                             <li>
-                                <strong>#emekli:</strong> Refers to retirees, showing concerns about how austerity measures affect pensioners.
+                                <strong>Government Units and Officials:</strong> Viewed as responsible for negative impacts on public services and lack of fairness.
+                            </li>
+                            <br>
+                            <li>
+                                <strong>Unions and Bureaus:</strong> Highlight the organized resistance and demand for fair treatment and transparency.
                             </li>
                         </ul>
     
@@ -373,184 +374,65 @@
 
             <h2>To take an action</h2>
             <div class="analysis-step">
-            <div class="suggestions">
-                <div class="suggestion-item">
-                    <h4>Enhance Transparency and Communication</h4>
-                    <p>
-                        
-                    </p>
+                <div class="suggestions">
+                    <div class="suggestion-item">
+                        <h4>Enhance Transparency and Communication</h4>
+                        <p></p>
+                    </div>
+                    <div class="suggestion-item">
+                        <ul>
+                            <li>
+                                <strong>Clear Information:</strong> Authorities should provide clear and detailed information about the necessity of the austerity measures and the expected outcomes.
+                            </li>
+                            <br>
+                            <li>
+                                <strong>Build Trust:</strong> This can help build public trust and reduce misinformation.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="suggestion-item">
+                        <h4>Implement Targeted Support</h4>
+                        <p></p>
+                    </div>
+                    <div class="suggestion-item">
+                        <ul>
+                            <li>
+                                <strong>Support Programs:</strong> Develop targeted support programs for the most affected groups, particularly lower-income citizens, to mitigate the negative impacts of the austerity measures.
+                            </li>
+                            <br>
+                            <li>
+                                <strong>Social Services:</strong> This can include financial aid, job training, and other social services.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="suggestion-item">
+                        <h4>Engage with Public Sector Employees</h4>
+                        <p></p>
+                    </div>
+                    <div class="suggestion-item">
+                        <ul>
+                            <li>
+                                <strong>Address Concerns:</strong> Increase engagement with public sector employees by addressing their concerns and improving morale during this transition period.
+                            </li>
+                            <br>
+                            <li>
+                                <strong>Maintain Productivity:</strong> Regular consultations, feedback mechanisms, and support initiatives can help maintain productivity and ensure smoother implementation of the measures.
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="suggestion-item">
-                    <ul>
-                        <li>
-                            <strong>Public Engagement:</strong> Establish regular forums and Q&A sessions with citizens to explain the rationale behind austerity measures and address concerns.
-                        </li>
-                        <li>
-                            <strong>Clear Communication:</strong> Provide detailed, accessible information about the measures, their objectives, and expected outcomes.
-                        </li>
-                    </ul>
-                </div>
-                <div class="suggestion-item">
-                    <h4>Protect Vulnerable Groups</h4>
-                    <p>
-                        
-                    </p>
-                </div>
-                <div class="suggestion-item">
-                    <ul>
-                        <li>
-                            <strong>Social Safety Nets:</strong>  Implement targeted support programs for lower-income citizens and public sector employees affected by austerity.
-                        </li>
-                        <li> 
-                            <strong>Equitable Policies:</strong> Ensure that austerity measures do not disproportionately impact vulnerable populations.
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="suggestion-item">
-                    <h4>Improve Government Efficiency
-
-                    </h4>
-                    <p>
-                        
-                    </p>
-                </div>
-                <div class="suggestion-item">
-                    <ul>
-                        <li>
-                            <strong>Performance Audits:</strong>Conduct regular audits of government operations to identify inefficiencies and areas for cost savings.
-                        </li>
-                        <li> 
-                            <strong>Best Practices:</strong> Adopt best practices from other countries that have successfully implemented austerity measures without compromising public services.
-                        </li>
-                    </ul>
-                </div>
-
-                
             </div>
-        </div>
-    <!-- Ubold Admin JS -->
-    <script src="path/to/ubold.min.js"></script>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <script src="path/to/ubold.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+            <script src="js/platformDist.js"></script>
+            <script src="js/sentimentDist.js"></script>
+            <script src="js/hashtagCloud.js"></script>
+            <script src="js/keywordDist.js"></script>
+
+
     <script>
-        // Dummy data for the charts with a professional color palette
-        var ctx1 = document.getElementById('platformDistributionChart').getContext('2d');
-        var platformDistributionChart = new Chart(ctx1, {
-            type: 'pie',
-            data: {
-                labels: ['Facebook', 'Instagram'],
-                datasets: [{
-                    label: 'Platform Distribution',
-                    data: [60, 40],
-                    backgroundColor: [
-                        '#2c3e50',
-                        '#18bc9c'
-                    ],
-                    borderColor: [
-                        '#2c3e50',
-                        '#18bc9c'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
-
-        var ctx2 = document.getElementById('sentimentChart').getContext('2d');
-        var sentimentChart = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Positive', 'Neutral', 'Negative'],
-                datasets: [{
-                    label: 'Sentiment Analysis',
-                    data: [70, 20, 10],
-                    backgroundColor: [
-                        '#3498db',
-                        '#95a5a6',
-                        '#e74c3c'
-                    ],
-                    borderColor: [
-                        '#3498db',
-                        '#95a5a6',
-                        '#e74c3c'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
-
-        var ctx3 = document.getElementById('coOccuringHashtagsChart').getContext('2d');
-        var coOccuringHashtagsChart = new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['#economy', '#policy', '#budget', '#reform'],
-                datasets: [{
-                    label: 'Co-occurring Hashtags',
-                    data: [30, 25, 20, 15],
-                    backgroundColor: [
-                        '#2c3e50',
-                        '#18bc9c',
-                        '#3498db',
-                        '#e74c3c'
-                    ],
-                    borderColor: [
-                        '#2c3e50',
-                        '#18bc9c',
-                        '#3498db',
-                        '#e74c3c'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
-
-        var ctx4 = document.getElementById('keywordsChart').getContext('2d');
-        var keywordsChart = new Chart(ctx4, {
-            type: 'bar',
-            data: {
-                labels: ['austerity', 'budget', 'economy', 'policy'],
-                datasets: [{
-                    label: 'Most Occurred Keywords',
-                    data: [35, 30, 25, 20],
-                    backgroundColor: [
-                        '#e74c3c',
-                        '#2c3e50',
-                        '#18bc9c',
-                        '#3498db'
-                    ],
-                    borderColor: [
-                        '#e74c3c',
-                        '#2c3e50',
-                        '#18bc9c',
-                        '#3498db'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
-
-        var ctx5 = document.getElementById('mostDiscussedPagesChart').getContext('2d');
-        var mostDiscussedPagesChart = new Chart(ctx5, {
-            type: 'horizontalBar',
-            data: {
-                labels: ['Central Bank', 'Ministry of Finance', 'Parliament'],
-                datasets: [{
-                    label: 'Most Discussed Pages',
-                    data: [40, 35, 25],
-                    backgroundColor: [
-                        '#95a5a6',
-                        '#18bc9c',
-                        '#e74c3c'
-                    ],
-                    borderColor: [
-                        '#95a5a6',
-                        '#18bc9c',
-                        '#e74c3c'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
 
         function downloadPDF() {
         const { jsPDF } = window.jspdf;
